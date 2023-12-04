@@ -39,36 +39,41 @@ export default function Header() {
   };
 
   return (
-    <header className="header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-  <div className="App-header-logo">
-    <img src={logo} alt="Logo" />
-  </div>
+    <header className="header">
+      <div className="App-header-logo">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div className="banner-header">
+        <Banner year={banner.year} link={banner.link} />
+      </div>
+      <div className="buttin-group-header">
+        <div
+          className="header-buttons-container"
+          style={{ marginLeft: "20px" }}
+        >
+          <a
+            href="https://comingoutspb.com/we-are-helping/"
+            className="button-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {language === "ru" ? "Нужна помощь" : "Need Help"}
+          </a>
+          <a
+            href="https://comingoutspb.org/support/"
+            className="button-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {language === "ru" ? "Хочу помочь" : "Want to Help"}
+          </a>
+        </div>
 
-  <Banner year={banner.year} link={banner.link}/>
-
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <ButtonGroupLang buttons={['ru','en']} onButtonClick={changeLanguage} />
-
-    <div className="header-buttons-container" style={{ marginLeft: '20px' }}> {/* Adjust marginLeft as needed */}
-      <a
-        href="https://comingoutspb.com/we-are-helping/"
-        className="button-secondary"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {language === 'ru' ? 'Нужна помощь' : 'Need Help'}
-      </a>
-      <a
-        href="https://comingoutspb.org/support/"
-        className="button-primary"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {language === 'ru' ? 'Хочу помочь' : 'Want to Help'}
-      </a>
-    </div>
-  </div>
-</header>
-
+        <ButtonGroupLang
+          buttons={["ru", "en"]}
+          onButtonClick={changeLanguage}
+        />
+      </div>
+    </header>
   );
 }

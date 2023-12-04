@@ -1,7 +1,7 @@
 {
   "name": "lgbt-visability",
   "version": "0.1.0",
-  "homepage": "https://tonyivanova.github.io/lgbt-visability/",
+  "homepage": "https://comingoutspb.github.io/lgbt-visibility/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

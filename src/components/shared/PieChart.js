@@ -124,11 +124,13 @@ export function PieChart({ data, onArcClick, topicKey }) {
       </svg>
       <div className={styles.legendContainer}>{legend}</div>
       {showTooltip && (
-        <div className={`pie-tooltip ${!showTooltip ? 'hidden' : ''}`} ref={tooltipRef}>
+        <div
+          className={`pie-tooltip ${!showTooltip ? "hidden" : ""}`}
+          ref={tooltipRef}
+        >
           {/* <div className="tip"> </div> */}
-            <h1>{tooltipContent}</h1>
-          </div>
-       
+          <h1>{tooltipContent}</h1>
+        </div>
       )}
     </div>
   );
