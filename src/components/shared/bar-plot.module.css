@@ -8,6 +8,10 @@
     cursor: pointer;
   }
   
+  .bar:hover {
+    opacity: 0.6;
+  }
+
   .legendContainer {
     display: flex;
     flex-direction: column;
