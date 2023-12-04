@@ -1,0 +1,41 @@
+.pieChart {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+.legendContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+}
+
+.legendText {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0 16px;
+}
+.container .slice {
+  transition-duration: 0.3s;
+  transition-property: filter, opacity;
+  filter: saturate(100%);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.container.hasHighlight .slice {
+  filter: saturate(50%);
+  opacity: 0.3;
+}
+
+.container.hasHighlight .slice:hover {
+  filter: saturate(80%);
+  opacity: 0.7;
+}
+
+.container.hasHighlight .slice .active {
+  filter: saturate(100%);
+  opacity: 1;
+}
