@@ -238,14 +238,19 @@ header {
 
 .button-group > button {
   margin: 0;
+  cursor: pointer;
 }
-.button-group2 > lang {
+.button-group2 > .lang {
   margin: 0; 
   border-radius: 0;
 }
 .button-group2 {
    margin: 0 42px 0 0;
+  cursor: pointer; 
+}
 
+.button-group2 > * {
+  cursor: pointer;
 }
 
 .button-group > button:first-child {
