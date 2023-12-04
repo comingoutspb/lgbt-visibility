@@ -240,7 +240,11 @@ function AppContent() {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader">
+        <img src={loader} alt="loading" />
+      </div>
+    );
   }
 
   if (error) {
