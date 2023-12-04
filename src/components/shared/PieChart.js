@@ -4,33 +4,36 @@ import styles from "./pie-chart.module.css";
 
 export function PieChart({ data, onArcClick, topicKey }) {
   // Conditional click handler based on topicKey
-  const handleClick = topicKey === 'openness' ? () => { } : onArcClick;
-  const [tooltipContent, setTooltipContent] = useState('');
+  const handleClick = topicKey === "openness" ? () => {} : onArcClick;
+  const [tooltipContent, setTooltipContent] = useState("");
   const [showTooltip, setShowTooltip] = useState(false);
-  const tooltipRef = useRef(null);
-  // const ref = useRef(null);
 
   const handleMouseEnter = (arc, event) => {
-    setTooltipContent(`${arc.data.value}`);
+    setTooltipContent(`${arc.data.value}%`);
     setShowTooltip(true);
-    if (tooltipRef.current) {
-      tooltipRef.current.style.opacity = 1;
-      tooltipRef.current.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-    }
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (arc, event) => {
     setShowTooltip(false);
-    if (tooltipRef.current) {
-      tooltipRef.current.style.opacity = 0;
-    }
+  };
+  // Legend
+  const tooltipRef = useRef(null);
+
+  useEffect(() => {
+    if (!tooltipRef.current) return;
+  }, [tooltipRef]);
+
+  const setTooltipPosition = (x, y) => {
+    if (!tooltipRef.current) return;
+    let newX = x - tooltipRef.current.offsetWidth / 2;
+    newX = Math.max(newX, 0);
+    tooltipRef.current.style.transform = `translate(${newX}px, ${y + 12}px)`;
   };
 
   const handleArcClick = (name) => {
     // setSelectedArc(name);
     onArcClick(name);
   };
-
 
   // Chart setup
   const width = 150;
@@ -41,7 +44,6 @@ export function PieChart({ data, onArcClick, topicKey }) {
   // Reference to the SVG group containing the arcs for adding/removing highlight class
   const ref = useRef(null);
 
-  
   // Compute the pie layout for the given data
   const pie = useMemo(() => {
     const pieGenerator = d3.pie().value((d) => d.value);
@@ -50,13 +52,15 @@ export function PieChart({ data, onArcClick, topicKey }) {
 
   // Arc generator to create arc shapes for pie chart
   // const arcGenerator = d3.arc();
-  const arcGenerator = d3.arc().innerRadius(radius * 0.6).outerRadius(radius);
-
+  const arcGenerator = d3
+    .arc()
+    .innerRadius(radius * 0.6)
+    .outerRadius(radius);
 
   // Function to slightly alter the color
   const adjustColor = (color) => {
     return d3.color(color).darker(0.15).toString();
-  }
+  };
   const assignedColors = {};
 
   // Create SVG shapes for each pie slice
@@ -72,7 +76,6 @@ export function PieChart({ data, onArcClick, topicKey }) {
     // Generate the SVG path data for the slice
     const slicePath = arcGenerator(sliceInfo);
 
-
     // Determine the fill color for the slice
     let color = arc?.data?.value ? colorScale(arc.data.value) : "lightgrey";
 
@@ -84,12 +87,11 @@ export function PieChart({ data, onArcClick, topicKey }) {
 
     // Return SVG group for each pie slice with interaction handlers
     return (
-
       <g
         key={i}
         className={styles.slice}
         onClick={() => onArcClick(arc.data.name)}
-        onMouseEnter={(e) => handleMouseEnter(arc, e)}
+        onMouseEnter={() => handleMouseEnter(arc, i)}
         onMouseLeave={handleMouseLeave}
       >
         <path d={arcGenerator(arc)} fill={color} className={styles.active} />
@@ -99,15 +101,18 @@ export function PieChart({ data, onArcClick, topicKey }) {
 
   const legend = pie.map((arc, i) => {
     return (
-      <div className={styles.legendItem} key={i} 
-      style={{ display: "flex", alignItems: "center" , marginLeft:"10px"}}>
+      <div
+        className={styles.legendItem}
+        key={i}
+        style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}
+      >
         <div
           style={{
             background: colorScale(arc.data.value),
             width: 10,
             height: 10,
-            borderRadius: '50%',
-            marginRight: '10px', // add some space between the color box and the text
+            borderRadius: "50%",
+            marginRight: "10px", // add some space between the color box and the text
           }}
         />
         <span>{arc.data.name}</span>
@@ -116,23 +121,26 @@ export function PieChart({ data, onArcClick, topicKey }) {
   });
 
   return (
-    <div className={styles.pieChart}>
+    <div
+      className={styles.pieChart}
+      onPointerMove={(ev) => {
+        setTooltipPosition(ev.clientX, ev.clientY);
+      }}
+    >
       <svg width={width} height={height}>
         <g transform={`translate(${width / 2}, ${height / 2})`} ref={ref}>
           {shapes}
         </g>
       </svg>
       <div className={styles.legendContainer}>{legend}</div>
-      {showTooltip && (
-        <div
-          className={`pie-tooltip ${!showTooltip ? "hidden" : ""}`}
-          ref={tooltipRef}
-        >
-          {/* <div className="tip"> </div> */}
-          <h1>{tooltipContent}</h1>
-        </div>
-      )}
+
+      <div
+        className={`pie-tooltip ${showTooltip ? "" : "hidden"}`}
+        ref={tooltipRef}
+      >
+        {/* <div className="tip"> </div> */}
+        <h1>{tooltipContent}</h1>
+      </div>
     </div>
   );
-
 }
