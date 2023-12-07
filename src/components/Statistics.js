@@ -315,7 +315,6 @@ export default function Statistics({ topic, topicsMap }) {
     return (
       <div className="section">
         <div>
-
           <ButtonGroupSubset
             buttonsConfig={subsetButtonsConfig}
             onButtonClick={selectGenderSubset}
@@ -327,39 +326,44 @@ export default function Statistics({ topic, topicsMap }) {
               buttonsConfig={opennessButtonsConfig}
               onButtonClick={selectOpennessSubset}
               styleType="openness-style"
-              init='family'
+              init="family"
             />
           )}
           {
-            // mapData.length > 0 
-            // && 
+            // mapData.length > 0
+            // &&
             <div className="map-section">
-              <h2>{language === "ru" ? `Результаты по федеральным округам` : `Resuls by federal district`}</h2>
-              <Map statistics={mapData} />
+              <h2>
+                {language === "ru"
+                  ? `Результаты по федеральным округам`
+                  : `Resuls by federal district`}
+              </h2>
+              <Map
+                statistics={mapData}
+                colorsForScale={
+                  topicsMap[topic] === "openness"
+                    ? ["#c6e000", "#00ef00", "#00a860"]
+                    : ["#F4F3EE", "#969AFF", "#242424"]
+                }
+              />
               <div>
-          <p className="statistics-description">
-            {mapDescription}
-            {topicsMap[topic] !== 'openness' && (
-              <strong>
-                {selectedQuestion !== "All" ? (
-                  language === 'ru'
-                    ? `На карте отображены результаты подкатегории ${selectedQuestion}. `
-                    : `The map displays results for the subcategory ${selectedQuestion}. `
-                ) : (
-                  language === 'ru'
-                    ? `На карте отображены результаты сумарно по всем подкатегориям.`
-                    : `The map displays results across all subcategories.`
-                )}
-              </strong>
-            )}
-          </p>
-          </div>
-
+                <p className="statistics-description">
+                  {mapDescription}
+                  {topicsMap[topic] !== "openness" && (
+                    <strong>
+                      {selectedQuestion !== "All"
+                        ? language === "ru"
+                          ? `На карте отображены результаты подкатегории ${selectedQuestion}. `
+                          : `The map displays results for the subcategory ${selectedQuestion}. `
+                        : language === "ru"
+                        ? `На карте отображены результаты сумарно по всем подкатегориям.`
+                        : `The map displays results across all subcategories.`}
+                    </strong>
+                  )}
+                </p>
+              </div>
             </div>
           }
-
-         
-
 
           {/* <h3 style={{ margin: 0 }}>
             {selectedQuestion !== "All" ? selectedQuestion : ""}
