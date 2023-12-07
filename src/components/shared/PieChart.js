@@ -90,7 +90,6 @@ export function PieChart({ data, onArcClick, topicKey }) {
       <g
         key={i}
         className={styles.slice}
-        onClick={() => onArcClick(arc.data.name)}
         onMouseEnter={() => handleMouseEnter(arc, i)}
         onMouseLeave={handleMouseLeave}
       >
