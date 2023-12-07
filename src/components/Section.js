@@ -16,7 +16,6 @@ import { useLanguage } from "../contexts/langContext";
 import { useYear, YearProvider } from "../contexts/yearContext";
 
 export default function Section({ topic, topicsMap }) {
-  // console.log('Section/topicsMap:',topicsMap)
   const [conclusions, setConclusions] = useState([]);
   const { year, setYear } = useYear();
   const { language } = useLanguage();

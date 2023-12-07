@@ -143,7 +143,6 @@ export default function Statistics({ topic, topicsMap }) {
     const baseName = topicKey || "violence";
     let sheetName = baseName;
 
-    // console.log('baseName:',baseName)
     if (baseName === "openness") { // If the topic is 'openness'
       if (genderSubset === 'all') {
         sheetName += '_' + opennessSubset; //e.g. openness_family
@@ -176,12 +175,11 @@ export default function Statistics({ topic, topicsMap }) {
         const sheetName = getSheetName(topicsMap[topic], genderSubset, opennessSubset);
         if (sheetName) {
           const mapDataResponse = await getMapData(year, language, sheetName, selectedQuestion, topicsMap[topic]);
-          // console.log('Fetched mapData:', mapDataResponse);
           setMapData(mapDataResponse);
 
           const barDataResponse = await getBarData(year, language, sheetName, selectedQuestion);
           setBarData(Array.isArray(barDataResponse) ? barDataResponse : []);
-          // console.log('statistics /pre pie language:', language)
+         
           const pieDataResponse = await getPieData(year, language, sheetName, selectedQuestion);
           setPieData(pieDataResponse);
 
@@ -220,38 +218,8 @@ export default function Statistics({ topic, topicsMap }) {
 
 
   const handleArcClick = (arcName) => {
-    // console.info("STATISTICS/Handling bar arc click ", arcName);
     setSelectedQuestion(arcName);
   };
-
-  useEffect(() => {
-    // // console.log("Statistics/pieData:", pieData);
-    // // console.log("Statistics/barData:", barData);
-    // console.log("Statistics/ mapDescription:", pieDescription);
-    // console.log("Statistics/ mapDescription:", barDescription);
-    // console.log("Statistics/ updated descriptions:", descriptions);
-    // // console.log("Statistics/updated mapDescription:", mapDescription);
-    // console.log("Statistics/updated mapData: ", mapData);
-    // console.log("Statistics/updated selectedQuestion: ", selectedQuestion);
-    // console.log("Statistics/updated opennessSubset: ", opennessSubset);
-    // console.log("Statistics/updated genderSubset: ", genderSubset);
-    // console.log("Statistics/updated incomeData: ", incomeData);
-  }, [
-    mapData,
-    mapDescription,
-    selectedQuestion,
-    genderSubset, opennessSubset,
-    incomeData
-  ]);
-
-  // function useLogOnUpdate(value, label) {
-  //   useEffect(() => {
-  //     console.log(`${label} updated:`, value);
-  //   }, [value]); // The effect runs every time 'value' changes
-  // }
-  // useLogOnUpdate(mapDescription, 'mapDescription');
-  // useLogOnUpdate(mapData, 'mapData');
-
 
 
   const subsetButtonsConfig = useMemo(() => {

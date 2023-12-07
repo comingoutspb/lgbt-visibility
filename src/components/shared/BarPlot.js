@@ -5,7 +5,6 @@ import styles from "./bar-plot.module.css";
 export function BarPlot({ data, language, onBarClick = () => {} }) {
   const handleBarClick = (name) => {
     onBarClick(name);
-    console.info("Clicked bar with name ", name); 
   };
 
   // Setup barplot

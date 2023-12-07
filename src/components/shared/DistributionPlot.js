@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-
+import {useLanguage} from '../../contexts/langContext'
 function DistributionPlot({ data }) {
-    console.log('DISTRPLOT/data input:', data)
+    const { language } = useLanguage();
+
     const d3Container = useRef(null);
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
     const width = 500 - margin.left - margin.right;
@@ -20,7 +21,7 @@ function DistributionPlot({ data }) {
             // Find the 'ages' and 'sample_mean_age' objects in the data
             const agesData = data.find(item => item.key === 'ages');
             const meanAgeData = data.find(item => item.key === 'sample_mean_age');
-            console.log('meanAgeData.value', meanAgeData.value)
+            // console.log('meanAgeData.value', meanAgeData.value)
             // Parse ages and mean age from the data
             // const ages = agesData ? JSON.parse(agesData.value) : [];
             const ages = agesData ? agesData.value.split(',').map(Number) : [];
@@ -86,8 +87,15 @@ function DistributionPlot({ data }) {
                 .attr("y2", height)
                 .attr("stroke", "red")
                 .attr("stroke-width", 2);
+
+            svg.append("text")
+                .attr("x", x(meanAge) + 5) // Position text slightly right of the line
+                .attr("y", 20) // Position text near the top of the plot
+                .text(language === 'ru' ? `Средний возраст: ${meanAge}` : `Mean Age: ${meanAge}`)
+                .attr("fill", "red")
+                .attr("font-size", "12px");
         }
-    }, [data]);
+    }, [data,language]);
 
     return (
         <svg

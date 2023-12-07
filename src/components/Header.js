@@ -34,7 +34,6 @@ export default function Header() {
   
   
   const changeLanguage = (event) => {
-    console.log(event.target.name);
     setLanguage(event.target.name);
   };
 

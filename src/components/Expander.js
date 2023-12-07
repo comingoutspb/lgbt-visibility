@@ -4,8 +4,7 @@ import { PieChart } from './shared/PieChart';
 import DistributionPlot from './shared/DistributionPlot';
 function Expander({ year, data, language }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  // const [language, setLanguage] = useState(''); 
-  console.log('Expander/ language',language)
+  
   const isDataLoaded = Array.isArray(data) && data.length > 0;
   // Filter data for sex-related categories
   const sexData = data.filter(item =>
@@ -97,7 +96,7 @@ function Expander({ year, data, language }) {
          
           <div style={{ padding: '20px' }} >
             <h2>
-            {language === 'ru' ? 'Количество респондентов по трансгендерности': 'Amount of respiondents by Transgenderness'}
+            {language === 'ru' ? 'Количество респондентов по транс/цисгендерности': 'Amount of respiondents by Transgenderness'}
             </h2>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <PieChart data={sexData} onArcClick={handleArcClick} />
