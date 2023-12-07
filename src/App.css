@@ -35,6 +35,9 @@ header img {
   max-width: 136px;
 }
 
+button {
+  cursor: pointer; 
+}
 
 header {
   position: fixed;

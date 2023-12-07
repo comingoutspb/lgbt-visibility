@@ -11,6 +11,7 @@ function DistributionPlot({ data }) {
 
     useEffect(() => {
         if (data && d3Container.current) {
+            d3.select(d3Container.current).selectAll("*").remove();
             const svg = d3.select(d3Container.current)
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
