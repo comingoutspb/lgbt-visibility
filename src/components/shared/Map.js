@@ -3,6 +3,8 @@ import * as d3 from "d3";
 import * as d3geo from "d3-geo";
 import geoData from "./../../assets/geodata/mapData.json";
 import '../../App.css';
+import { useLanguage } from "../../contexts/langContext";
+import { getTranslations } from "../../services/googleSheetsService";
 
 function Map({ statistics,style={} }) {
 // Check if mapData is being passed correctly as statistics
@@ -14,6 +16,21 @@ useEffect(() => {
   // Map
   const [regionDescription, setRegionDescription] = useState("");
   const [regionValue, setRegionValue] = useState("");
+
+  const { language } = useLanguage();
+  const [translations, setTranslations] = useState([]);
+
+  useEffect(() => {
+    getTranslations()
+      .then(data => {
+        setTranslations(data);
+      })
+      .catch(err => {
+      })
+      .finally(() => {
+      });
+  }, []); 
+
 
   const projection = d3geo
     .geoConicConformal()
@@ -60,7 +77,15 @@ useEffect(() => {
               opacity="0.9"
               onMouseEnter={(e) => {
                 d3.select(e.target).attr("opacity", 1);
-                setRegionDescription(relevantStatistics.name);
+                // setRegionDescription(relevantStatistics.name);
+                // Check the language and set the region description accordingly
+                if (language === 'ru') {
+                  setRegionDescription(relevantStatistics.name);
+                } else {
+                  // Find the English equivalent in translations
+                  const translation = translations.find(t => t.name_ru === relevantStatistics.name);
+                  setRegionDescription(translation ? translation.name_en : relevantStatistics.name);
+                }
                 setRegionValue(Math.round(relevantStatistics.value));
               }}
               onMouseOut={(e) => {

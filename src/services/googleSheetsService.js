@@ -391,6 +391,7 @@ export async function getMapData(year, language, sheetName, selectedQuestion, to
     }
     else {
       const questions = await getQuestions(year);
+     
       // console.log(`Fetching mapData for year: ${year}, sheetName: ${sheetName}`);
       // console.log('getMapData/selectedQuestion', selectedQuestion);
 
@@ -503,7 +504,7 @@ export async function getBarData(year, language, sheetName) {
 export async function getPieData(year, language, sheetName) {
   console.log('pie language input:', language)
   await loadConfig();
-  const translations = await getTranslations(year);
+  const translations = await getTranslations();
 
   return getSheetData(dataMap[year], sheetName).then(data => {
     // Find the row where the district is 'All districts'
@@ -601,7 +602,7 @@ export async function getQuestions(year) {
 }
 
 
-export async function getTranslations(year) {
+export async function getTranslations() {
   // console.log(`Loading questions_ for year: ${year}, language: ${language}...`);
   await loadConfig();
   return getSheetData(dataMap['config'], 'translations').then(data => {
@@ -619,6 +620,11 @@ export async function getTranslations(year) {
     throw error;
   });
 }
+
+
+
+
+
 
 export async function getBannerData() {
   const bannerData = await getSheetData(dataMap['config'], 'data_collection');
