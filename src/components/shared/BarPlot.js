@@ -79,16 +79,19 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
   //show
   return (
     <div className={styles.barChart}>
-      <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
+      <svg
+        width={width + margin.left + margin.right}
+        height={height + margin.top + margin.bottom}
+      >
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           {bars}
           <g
             transform={`translate(0,${height})`}
             // ref={node => d3.select(node).call(d3.axisBottom(xScale))}
           />
-          <g ref={node => d3.select(node).call(d3.axisLeft(yScale))} />
-         
-           <text
+          <g ref={(node) => d3.select(node).call(d3.axisLeft(yScale))} />
+
+          <text
             transform={`translate(${width / 2}, ${height + margin.bottom - 5})`}
             textAnchor="middle"
           >
@@ -102,11 +105,12 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
           >
             {yAxisLabel}
           </text>
-
         </g>
       </svg>
+      <p onClick={() => handleBarClick("All")} class="show-all-button">
+        Показать Всё
+      </p>
       <div className={styles.legendContainer}>{legend}</div>
-      
     </div>
   );
 }

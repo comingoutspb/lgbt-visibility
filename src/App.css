@@ -489,3 +489,13 @@ header {
   width: 100%;
   height: 100%;
 }
+
+.show-all-button {
+  cursor: pointer; 
+  color:  #969aff;
+}
+
+
+.show-all-button:hover {
+  color:  #777cff;
+}
