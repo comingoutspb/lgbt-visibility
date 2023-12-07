@@ -214,7 +214,7 @@ export default function Statistics({ topic, topicsMap }) {
 
   useEffect(() => {
     setSelectedQuestion("All");
-  }, [language]);
+  }, [language, topic]);
 
 
   const handleArcClick = (arcName) => {
