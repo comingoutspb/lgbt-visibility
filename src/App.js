@@ -175,7 +175,9 @@ function AppContent() {
 
         if (isMounted) {
           setSections(sectionsData);
-          setTopic(sectionsData[0])
+          if (!topic) {
+            setTopic(sectionsData[0]);
+          }
 
         }
       } catch (err) {

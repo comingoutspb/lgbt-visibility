@@ -140,7 +140,7 @@ export default function Statistics({ topic, topicsMap }) {
 
   // Generate a sheetName given selections
   function getSheetName(topicKey, genderSubset, opennessSubset) {
-    const baseName = topicKey || "violence";
+    const baseName = topicKey;
     let sheetName = baseName;
 
     if (baseName === "openness") { // If the topic is 'openness'
