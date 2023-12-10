@@ -179,7 +179,7 @@ export default function Statistics({ topic, topicsMap }) {
 
           const barDataResponse = await getBarData(year, language, sheetName, selectedQuestion);
           setBarData(Array.isArray(barDataResponse) ? barDataResponse : []);
-         
+
           const pieDataResponse = await getPieData(year, language, sheetName, selectedQuestion);
           setPieData(pieDataResponse);
 
@@ -211,6 +211,7 @@ export default function Statistics({ topic, topicsMap }) {
   const selectOpennessSubset = (event) => {
     setOpennessSubset(event.target.name);
   };
+
 
   useEffect(() => {
     setSelectedQuestion("All");
@@ -285,7 +286,7 @@ export default function Statistics({ topic, topicsMap }) {
             // <div>
             <div className="charts-section">
               <h2>{language === "ru" ? `Результаты по вопросам в категории` : `Results by questions in category`}</h2>
-              <BarPlot data={barData} onBarClick={handleArcClick} language={language}/>
+              <BarPlot data={barData} onBarClick={handleArcClick} language={language} />
               <p className="statistics-description">{barDescription}</p>
               <h2>{language === "ru" ? `Средний доход по всем округам` : `Average income accross all districts`}</h2>
               <PieChart data={incomeData} topicKey={topicsMap[topic]} />
@@ -349,6 +350,7 @@ export default function Statistics({ topic, topicsMap }) {
               <div>
                 <p className="statistics-description">
                   {mapDescription}
+<<<<<<< Updated upstream
                   {topicsMap[topic] !== "openness" && (
                     <strong>
                       {selectedQuestion !== "All"
@@ -358,13 +360,35 @@ export default function Statistics({ topic, topicsMap }) {
                         : language === "ru"
                         ? `На карте отображены результаты сумарно по всем подкатегориям.`
                         : `The map displays results across all subcategories.`}
+=======
+                  {topicsMap[topic] !== 'openness' && (
+                    <strong>
+                      {selectedQuestion !== "All" ? (
+                        language === 'ru'
+                          ? ` На карте отображены результаты подкатегории ${selectedQuestion}.`
+                          : ` The map displays results for the subcategory ${selectedQuestion}.`
+                      ) : (
+                        language === 'ru'
+                          ? ` На карте отображены результаты сумарно по всем подкатегориям.`
+                          : ` The map displays results across all subcategories.`
+                      )}
+>>>>>>> Stashed changes
                     </strong>
                   )}
                 </p>
               </div>
+<<<<<<< Updated upstream
             </div>
           }
 
+=======
+
+            </div>
+          }
+
+
+
+>>>>>>> Stashed changes
           {/* <h3 style={{ margin: 0 }}>
             {selectedQuestion !== "All" ? selectedQuestion : ""}
           </h3> */}

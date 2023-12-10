@@ -66,8 +66,6 @@ function Expander({ year, data, language }) {
               : `Respondents Information for the year ${year}`}
 
           </h3> */}
-          
-
          
           <div>
           <h2>
@@ -103,10 +101,8 @@ function Expander({ year, data, language }) {
             </div>
           </div>
 
-
-          {/* Example image */}
-          <img src="path_to_image.jpg" alt="Description" />
-          {/* More content */}
+          {/* <img src="path_to_image.jpg" alt="Description" /> */}
+        
         </div>
       )}
     </div>
