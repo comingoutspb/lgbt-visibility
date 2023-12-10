@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { getSampleData } from '../services/googleSheetsService'
 import { PieChart } from './shared/PieChart';
 import DistributionPlot from './shared/DistributionPlot';
 function Expander({ year, data, language }) {
@@ -101,7 +100,6 @@ function Expander({ year, data, language }) {
             </div>
           </div>
 
-          {/* <img src="path_to_image.jpg" alt="Description" /> */}
         
         </div>
       )}

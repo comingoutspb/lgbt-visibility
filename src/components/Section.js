@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PersonalStories from "./shared/PersonalStories";
-import {
-  getSheetData,
-  dataMap,
-  //  topicsMap,
-  getDescriptions, getConclusions,
+import {getConclusions,
 } from "../services/googleSheetsService";
 import Statistics from "./Statistics";
-import {
-  useDataMap,
-  useDatata,
-  useWhichSubset
-} from "../contexts/dataContext";
 import { useLanguage } from "../contexts/langContext";
 import { useYear, YearProvider } from "../contexts/yearContext";
 
 export default function Section({ topic, topicsMap }) {
   const [conclusions, setConclusions] = useState([]);
-  const { year, setYear } = useYear();
+  const { year } = useYear();
   const { language } = useLanguage();
 
 

@@ -3,35 +3,16 @@ import Map from "./shared/Map";
 import { PieChart } from "./shared/PieChart";
 import { BarPlot } from "./shared/BarPlot";
 import {
-  getSections,
   getDescriptions,
-  getStories,
   getConclusions,
-  // getConfiguration,
-  getSheetData,
-  dataMap,
-  // topicsMap,
-  loadYearData,
-  loadConfig,
   getBarData, getMapData, getPieData, getIncomeData
 } from "../services/googleSheetsService";
-import { ButtonGroupLang, ButtonGroupSubset } from "./shared/ButtonGroup";
+import { ButtonGroupSubset } from "./shared/ButtonGroup";
 import { useYear } from "../contexts/yearContext";
-import {
-  // useConfiguration,
-  // useDescriptions,
-  // useData,
-
-  // useSubset,
-  useDataMap,
-} from "../contexts/dataContext";
 import { useLanguage } from "../contexts/langContext";
-// import { getDescriptions } from ".././services/googleSheetsService";
 
 
 export default function Statistics({ topic, topicsMap }) {
-  // console.log('STATISTICS/topicsMap:',topicsMap)
-  // console.log('STATISTICS/topic:',topic)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -48,13 +29,10 @@ export default function Statistics({ topic, topicsMap }) {
 
   const [sections, setSections] = useState([]);
   const [descriptions, setDescriptions] = useState([]);
-  // const [configuration, setConfiguration] = useState([]);
   const [mapDescription, setMapDescription] = useState('');
   const [pieDescription, setPieDescription] = useState('');
   const [barDescription, setBarDescription] = useState('');
 
-
-  // const [stories, setStories] = useState([]);
   const [conclusions, setConclusions] = useState([]);
 
   // Get all descriptions for language
@@ -113,11 +91,9 @@ export default function Statistics({ topic, topicsMap }) {
     const fetchData = async () => {
       if (topicsMap) {
         try {
-          // const storiesData = await getStories(language);
           const conclusionsData = await getConclusions(year, language);
 
           if (isMounted) {
-            // setStories(storiesData);
             setConclusions(conclusionsData);
           }
         } catch (err) {
@@ -160,7 +136,6 @@ export default function Statistics({ topic, topicsMap }) {
       }
 
     }
-    // console.log('sheetName', sheetName);
     return sheetName;
   }
 
@@ -192,7 +167,6 @@ export default function Statistics({ topic, topicsMap }) {
         console.error("Failed to get sheet data:", error);
       }
     };
-    // console.log('STATISTICS/ fetchData/ Current selectedQuestion:', selectedQuestion);
     fetchData();
   }, [
     topicsMap,
@@ -261,7 +235,7 @@ export default function Statistics({ topic, topicsMap }) {
         { label: "Учеба/работа", value: "associates" },
       ];
     }
-    //TODO: move to service & populate from Config gsheet
+    //?TODO: move to service & populate from Config gsheet
 
     // default to Russian if the language doesn't match any known value
     return [
@@ -343,24 +317,13 @@ export default function Statistics({ topic, topicsMap }) {
                 statistics={mapData}
                 colorsForScale={
                   topicsMap[topic] === "openness"
-                    ? ["#c6e000", "#00ef00", "#00a860"]
-                    : ["#F4F3EE", "#969AFF", "#242424"]
+                    ? ["#F4F3EE", "#7fc97f", "#1C402E"]//green
+                    : ["#F4F3EE", "#969AFF", "#242424"]//purple
                 }
               />
               <div>
                 <p className="statistics-description">
                   {mapDescription}
-<<<<<<< Updated upstream
-                  {topicsMap[topic] !== "openness" && (
-                    <strong>
-                      {selectedQuestion !== "All"
-                        ? language === "ru"
-                          ? `На карте отображены результаты подкатегории ${selectedQuestion}. `
-                          : `The map displays results for the subcategory ${selectedQuestion}. `
-                        : language === "ru"
-                        ? `На карте отображены результаты сумарно по всем подкатегориям.`
-                        : `The map displays results across all subcategories.`}
-=======
                   {topicsMap[topic] !== 'openness' && (
                     <strong>
                       {selectedQuestion !== "All" ? (
@@ -372,26 +335,14 @@ export default function Statistics({ topic, topicsMap }) {
                           ? ` На карте отображены результаты сумарно по всем подкатегориям.`
                           : ` The map displays results across all subcategories.`
                       )}
->>>>>>> Stashed changes
                     </strong>
                   )}
                 </p>
               </div>
-<<<<<<< Updated upstream
-            </div>
-          }
-
-=======
 
             </div>
           }
 
-
-
->>>>>>> Stashed changes
-          {/* <h3 style={{ margin: 0 }}>
-            {selectedQuestion !== "All" ? selectedQuestion : ""}
-          </h3> */}
           <br />
         </div>
         <div>{charts()}</div>

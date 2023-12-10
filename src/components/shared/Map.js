@@ -69,7 +69,6 @@ function Map({
             opacity="0.9"
             onMouseEnter={(e) => {
               d3.select(e.target).attr("opacity", 1);
-              // setRegionDescription(relevantStatistics.name);
               // Check the language and set the region description accordingly
               if (language === "ru") {
                 setRegionDescription(relevantStatistics.name);

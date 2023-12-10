@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import arrow from "./../../assets/arrow.svg";
 import { 
-  getSheetData,
 getStories,
-// topicsMap, 
-dataMap 
 } from "../../services/googleSheetsService";
 // import { useData, useDataMap } from "../../contexts/dataContext"
 import { useYear } from "../../contexts/yearContext";
@@ -13,10 +10,10 @@ import { useLanguage } from "../../contexts/langContext";
 export default function PersonalStories({ topic, topicsMap }) {
   const [storyIndex, setStoryIndex] = useState(null);
   const [stories, setStories] = useState([]);
-  const { year, setYear } = useYear();
+  const { year } = useYear();
   const { language } = useLanguage();
 
-  const [loading, setLoading] = useState(true);
+  const [_, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
