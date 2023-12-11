@@ -1,5 +1,6 @@
 // googleSpredsheetService.js
-// import { useLanguage } from '../contexts/langContext';
+
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 // Object for mapping spreadsheets to their ids in Google Drive
@@ -30,7 +31,6 @@ async function loadConfig() {
 //  retrieve data from a gsheet and cache it
 export async function getSheetData(tableId, sheetName) {
   var loader = false
-  // console.log("getSheetData " + tableId + "  " + sheetName)
   // Check if is in cache first 
   if (dataCache[tableId] == undefined) {
     loader = true
@@ -77,7 +77,6 @@ export async function getSheetData(tableId, sheetName) {
         jsonData.push(rowObject)
       }
     })
-    // console.log('getSheetData/ jsonData:',jsonData)
     return jsonData
   }
 
@@ -93,7 +92,6 @@ export async function getSheetData(tableId, sheetName) {
   }
 
   function waitForCacheAndExec(tableId, sheetName, func) {
-    console.log("Waiting for cache on ", tableId, sheetName)
     var myInterval = null
     const waitFunc = function () {
       if (dataCache[tableId + "_" + sheetName] && dataCache[tableId] == 'loaded' || loader) {
@@ -113,7 +111,6 @@ export async function getSheetData(tableId, sheetName) {
         return response.json();
       })
       .then(data => {
-        // console.log('getSheetData/ API response:', tableId);
         fillCachesWithTransformedWorksheetsData(data)
         dataCache[tableId] = 'loaded'
         resolve(dataCache[tableId + "_" + sheetName])
@@ -133,7 +130,6 @@ export async function getSheetData(tableId, sheetName) {
 
 
   });
-  console.log('worksheetData/ dataCache:', dataCache)
   return worksheetData;
 }
 
@@ -158,7 +154,6 @@ export async function loadYearData(year) {
     // get data for all sheets in the spreadsheet
     getSheetData(spreadsheetId, "economical_status")
 
-    // console.log('loadYearData/ dataCache:',dataCache)
     return 'All sheets data fetched and stored in cache.';
   } catch (error) {
     // console.error(`Error fetching data for year ${year}:`, error);
@@ -176,18 +171,12 @@ export async function getSections(language) {
 
 //TODO: doesnt see topicKey passed]
 export async function getDescriptions(language, topicKey) {
-  // console.log('Loading configuration...');
   await loadConfig();
-  // console.log(`Fetching descriptions for language: ${language} and topic: ${topicKey}...`);
-
   return getSheetData(dataMap['config'], 'descriptions').then(data => {
-    // console.log('Raw descriptions data fetched:', data);
-
+   
     // Filter out the row where `key` equals `topicsMap[topic]`
     const filteredData = data.filter(itm => itm.key === topicKey)
-    // console.log(`Filtered descriptions data, removed topic ${topicKey}:`, filteredData);
-
-    const descriptions = filteredData.map(itm => ({ // Map over each item and transform it into an object
+     const descriptions = filteredData.map(itm => ({ // Map over each item and transform it into an object
       key: itm.key,
       bar: itm[`bar_${language}`],
       map: itm[`map_${language}`],
@@ -195,12 +184,8 @@ export async function getDescriptions(language, topicKey) {
       pie: itm[`pie_${language}`]
     }));
 
-    // Log the final descriptions object after reduce
-    // console.log(`Processed ${topicKey} descriptions:`, descriptions);
-
     return descriptions;
   }).catch(error => {
-    // Log and throw any errors encountered during the fetch
     console.error('Error fetching descriptions:', error);
     throw error;
   });
@@ -208,10 +193,10 @@ export async function getDescriptions(language, topicKey) {
 
 
 export async function getConclusions(year, language, topicKey) {
-  // console.log(`Loading conclusions for year: ${year}, language: ${language}...`);
+ 
   await loadConfig();
   return getSheetData(dataMap[year], 'conclusions').then(data => {
-    // console.log('Raw conclusions data fetched:', data);
+   
 
     // Filter out rows that do not match the topicKey or where the 'text' field for the language is empty
     const filteredData = data.filter(itm => itm.key === topicKey && itm["text_" + language]?.trim());
@@ -222,7 +207,6 @@ export async function getConclusions(year, language, topicKey) {
       text: itm["text_" + language]
     }));
 
-    console.log('Processed conclusions:', conclusions);
     return conclusions;
   }).catch(error => {
     console.error('Error fetching conclusions:', error);
@@ -231,7 +215,7 @@ export async function getConclusions(year, language, topicKey) {
 }
 
 export async function getStories(year, language, topicKey) {
-  // console.log(`Loading stories for year: ${year}, language: ${language}...`);
+ 
   await loadConfig();
 
   return getSheetData(dataMap[year], 'stories_filtered').then(data => {
@@ -421,7 +405,6 @@ export async function getBarData(year, language, sheetName) {
 
 
 export async function getPieData(year, language, sheetName) {
-  console.log('pie language input:', language)
   await loadConfig();
   const translations = await getTranslations();
 

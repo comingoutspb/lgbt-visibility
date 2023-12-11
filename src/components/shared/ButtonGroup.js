@@ -20,7 +20,6 @@ export const ButtonGroup1 = ({ buttons, onButtonClick }) => {
           name={buttonLabel}
           onClick={(event) => handleClick(event, i)}
           className={
-            // i === clickedId ? "button-secondary active" : "button-secondary"
             i === clickedId ? "button-tetriary active" : "button-tetriary"
 
           }
@@ -51,8 +50,7 @@ export const ButtonGroup2 = ({ buttons, onButtonClick }) => {
           onClick={(event) => handleClick(event, i)}
           className={
             i === clickedId ? "button-secondary active" : "button-secondary"
-            // i === clickedId ? "button-tetriary active" : "button-tetriary"
-
+           
           }
         >
           {buttonLabel}
@@ -116,7 +114,6 @@ export function ButtonGroupSubset({ buttonsConfig, onButtonClick,styleType, init
             setClickedId(i);
           }}
           className={
-            // i === clickedId ? "lang active" : "lang"
             i === clickedId ? `lang active ${styleType}` : `lang ${styleType}`
           }
 
@@ -163,6 +160,3 @@ export function ButtonGroupOpennes({ buttonsConfig, onButtonClick }) {
 }
 
 
-
-
-// export default ButtonGroup;

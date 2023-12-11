@@ -9,7 +9,7 @@ import { getTranslations } from "../../services/googleSheetsService";
 function Map({
   statistics,
   style = {},
-  colorsForScale = ["#F4F3EE", "#969AFF", "#242424"]
+  colorsForScale = ["#F4F3EE", "#969AFF", "#000"]
 }) {
   // Check if mapData is being passed correctly as statistics
   useEffect(() => {}, [statistics]);
@@ -39,8 +39,10 @@ function Map({
   const path = d3geo.geoPath().projection(projection);
 
   const values = statistics.map((item) => item.value);
-  const min = Math.min(...values);
-  const max = Math.max(...values);
+  // const min = Math.min(...values);
+  // const max = Math.max(...values);
+  const min = Math.min(0);
+  const max = Math.max(100);
 
   const getScale = () => {
     return [min, (min + max) / 2, max];
@@ -69,7 +71,7 @@ function Map({
             opacity="0.9"
             onMouseEnter={(e) => {
               d3.select(e.target).attr("opacity", 1);
-              // setRegionDescription(relevantStatistics.name);
+            
               // Check the language and set the region description accordingly
               if (language === "ru") {
                 setRegionDescription(relevantStatistics.name);

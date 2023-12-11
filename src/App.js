@@ -4,14 +4,8 @@ import "./App.css";
 import { createContext, useEffect, useState, useContext } from "react";
 import {
   getSections,
-  getDescriptions,
-  getStories,
-  getConclusions,
-  getSheetData,
-  dataMap,
   makeTopicsMap,
   loadYearData,
-  loadConfig,
   getYears,
   getSampleData,
   getFullReportLink
@@ -24,15 +18,7 @@ import bg2 from "./assets/bg2.svg";
 import loader from "./assets/loader.gif";
 import { ButtonGroup1, ButtonGroup2 } from "./components/shared/ButtonGroup";
 import { LinkComponent } from './components/shared/LinkComponent';
-import {
-  DataProvider,
-  useTopicsMap
-  // useData,
-  // useDataMap,
-  // useConfiguration,
-  // useDescriptions,
-  // useSubset
-} from "./contexts/dataContext";
+import { DataProvider} from "./contexts/dataContext";
 import { LanguageProvider, useLanguage } from './contexts/langContext';
 import Section from "./components/Section";
 import { useYear, YearProvider } from "./contexts/yearContext";
@@ -40,10 +26,8 @@ import { useYear, YearProvider } from "./contexts/yearContext";
 export const DataContext = createContext([]);
 
 function AppContent() {
-  // console.log('App/ AppContent start')
   const CONFIG_SHEET_ID = process.env.REACT_APP_CONFIG_SPREADSHEET_ID
 
-  // const years = getYears()//Object.keys(dataMap);// to get list of years reports exist for
   const [years,setYears] = useState([]);
   const { language, setLanguage } = useLanguage();
   const { year, setYear } = useYear(); // report year
@@ -52,8 +36,6 @@ function AppContent() {
   const [error, setError] = useState(null);
   const [reportLink, setReportLink] = useState('');
 
-  const [genderSubset, setGenderSubset] = useState(''); //Trans/Cis
-  const [opennessSubset, setOpennessSubset] = useState('') //family/friends
   const [topic, setTopic] = useState('')
 
   const [yearData, setYearData] = useState({});
@@ -66,9 +48,6 @@ function AppContent() {
 
   const [topicsMap, setTopicsMap] = useState({});
 
-  // console.log('App/ finished inits')
-  
-  
     useEffect(() => {
       const fetchYears = async () => {
 

@@ -4,18 +4,12 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   makeTopicsMap,
 } from '../services/googleSheetsService';
-import { useYear } from './yearContext';
-import { useLanguage } from './langContext'
-
 // Create a DataContext
 export const DataContext = createContext();
 
 // Provider component
 export const DataProvider = ({ children }) => {
-  const { year } = useYear()
-  const { language } = useLanguage()
 
-  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

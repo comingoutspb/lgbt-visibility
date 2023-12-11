@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
-import logo from "./../assets/logo.svg";
+import logoRU from "./../assets/logoRU.svg"; 
+import logoEN from "./../assets/logoEN.svg"; 
+
 import {ButtonGroupLang} from "./shared/ButtonGroup";
 import { useLanguage } from '../contexts/langContext';
 import { getBannerData } from "../services/googleSheetsService";
@@ -7,6 +9,8 @@ import { getBannerData } from "../services/googleSheetsService";
 
 export default function Header() {
   const {language, setLanguage} = useLanguage(); 
+  const logo = language === 'ru' ? logoRU : logoEN;
+  
   const Banner = ({ year, link }) => {
     return (
       <a href={link} target="_blank" rel="noopener noreferrer" className="banner">
