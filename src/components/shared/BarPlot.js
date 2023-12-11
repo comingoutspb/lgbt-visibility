@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as d3 from "d3";
 import styles from "./bar-plot.module.css";
 
@@ -30,11 +30,20 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
   const handleMouseEnter = (d, event) => {
     setTooltipContent(`${d.value}%`);
     setShowTooltip(true);
-    if (tooltipRef.current) {
-      tooltipRef.current.style.opacity = 1;
-      tooltipRef.current.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-    }
   };
+
+
+  useEffect(() => {
+    if (!tooltipRef.current) return;
+  }, [tooltipRef]);
+
+  const setTooltipPosition = (x, y) => {
+    if (!tooltipRef.current) return;
+    let newX = x - tooltipRef.current.offsetWidth / 2;
+    newX = Math.max(newX, 0);
+    tooltipRef.current.style.transform = `translate(${newX}px, ${y + 12}px)`;
+  };
+
 
   const handleMouseLeave = () => {
     setShowTooltip(false);
@@ -53,6 +62,7 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
         onClick={() => handleBarClick(d.name)}
         onMouseEnter={(event) => handleMouseEnter(d, event)}
         onMouseLeave={handleMouseLeave}
+       
       >
         <rect
           x={xScale(d.name)}
@@ -85,7 +95,11 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
   });
 
   return (
-    <div className={styles.barChart}>
+    <div className={styles.barChart}
+    onPointerMove={(ev) => {
+      setTooltipPosition(ev.clientX, ev.clientY);
+    }}
+    >
       <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           {bars}
@@ -102,12 +116,13 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
       <p onClick={() => handleBarClick("All")} className="show-all-button">
       {language === 'en' ? 'Select all subcategories ' : 'Выбрать все подкатегории'}
       </p>
-      <div className={styles.legendContainer}>{legend}</div>
       {showTooltip && (
-        <div className={`bar-tooltip ${showTooltip ? "" : "hidden"}`} ref={tooltipRef}>
+        <div className={`pie-tooltip ${showTooltip ? "" : "hidden"}`} ref={tooltipRef}>
           <h1>{tooltipContent}</h1>
         </div>
       )}
+      <div className={styles.legendContainer}>{legend}</div>
+      
     </div>
   );
 }
