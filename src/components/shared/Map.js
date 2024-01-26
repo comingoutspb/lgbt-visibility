@@ -14,6 +14,7 @@ function Map({
   // Check if mapData is being passed correctly as statistics
   useEffect(() => {}, [statistics]);
 
+  console.log('geoData',geoData)
   // Map
   const [regionDescription, setRegionDescription] = useState("");
   const [regionValue, setRegionValue] = useState("");
@@ -34,11 +35,13 @@ function Map({
     .geoConicConformal()
     .scale(300)
     .center([54, 44])
-    .rotate([-105, 0]);
+    .rotate([-110, 0]);
 
+  console.log('projection',projection)  
   const path = d3geo.geoPath().projection(projection);
-
+  console.log('path',path)
   const values = statistics.map((item) => item.value);
+  
   // const min = Math.min(...values);
   // const max = Math.max(...values);
   const min = Math.min(0);
@@ -51,8 +54,30 @@ function Map({
   var colorScale = d3.scaleLinear(getScale(), colorsForScale);
 
   const mapElements = useMemo(() => {
+   
+
     if (statistics.length > 0) {
+      console.log('geoData.features',geoData.features)
       return geoData.features.map((d, index) => {
+
+
+        console.log('d.coordinates[0]',d.geometry.coordinates[0])
+
+       // Reverse the coordinates of each polygon
+      //  if (d.name=== "Приволжский федеральный округ"){
+      //     d.geometry.coordinates[0].forEach(polygon => {
+              
+      //           console.log('polygon',polygon)
+      //             polygon.reverse();
+      //             console.log('polygon.reverse()',polygon)
+      //         });
+       
+      //       }
+
+        const pathD = path(d);
+        // console.log('Feature path for', d.properties.name, ':', pathD);
+        if (!pathD) return null; // Skip if path is not defined
+
         const relevantStatistics = statistics.filter(
           (item) => item.name === d.properties.name
         )[0];
@@ -61,10 +86,10 @@ function Map({
           : "lightgrey";
         return (
           <path
-            key={"map-element-" + index}
+            key={"map-element-" + d.properties.name}
             name={d.properties.name}
             d={path(d)}
-            fill={color}
+            fill= {color}
             stroke="#0e1724"
             strokeWidth="0.5"
             strokeOpacity="0.5"
