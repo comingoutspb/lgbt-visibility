@@ -100,7 +100,7 @@ function AppContent() {
           if (link) {
             setReportLink(link); 
           } else {
-            setReportLink('123'); 
+            setReportLink('404'); 
           }
         }
       } catch (error) {

@@ -78,20 +78,23 @@ export function BarPlot({ data, language, onBarClick = () => {} }) {
   });
 
   // Create legend
-  const legend = data.map((d, i) => {
-    return (
-      <div className={styles.legendText} key={i}>
-        <div
-          style={{
-            background: colorScale(d.value),
-            width: 10,
-            height: 10,
-            borderRadius: 10,
-          }}
-        ></div>
-        {d.name}
-      </div>
-    );
+  const legend = data.map((d, i) => { 
+    return ( 
+      <div className={styles.legendText} key={i}> 
+        <div 
+          style={{ 
+            background: colorScale(d.value), 
+            width: 10, 
+            height: 10, 
+            borderRadius: 10, 
+            minWidth: 10, 
+            boxShadow: '-2px 3px 5px 0px rgba(0, 0, 0, 0.1)', 
+            fontSize: 10,  
+          }} 
+        ></div> 
+        {d.name} 
+      </div> 
+    ); 
   });
 
   return (

@@ -237,6 +237,7 @@ header {
   left: 0px;
   top: 200px;
   overflow: hidden;
+  opacity: 0.3;
 }
 
 .button-group > button {
