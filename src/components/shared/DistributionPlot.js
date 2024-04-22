@@ -5,7 +5,7 @@ function DistributionPlot({ data }) {
     const { language } = useLanguage();
 
     const d3Container = useRef(null);
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    const margin = { top: 20, right: 30, bottom: 50, left: 50 };
     const width = 500 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
@@ -95,6 +95,24 @@ function DistributionPlot({ data }) {
                 .text(language === 'ru' ? `Средний возраст: ${meanAge}` : `Mean Age: ${meanAge}`)
                 .attr("fill", "red")
                 .attr("font-size", "12px");
+
+                // Draw X-axis label
+            svg.append("text")
+            .attr("x", width / 2) // Position at the center of the axis
+            .attr("y", height + margin.bottom -10) // Position below the bottom axis
+            .style("text-anchor", "middle")
+            .style("font-size", "12px")
+            .text(language === 'ru' ? `Возраст` : `Age`);
+
+            // Draw Y-axis label
+            svg.append("text")
+                .attr("transform", "rotate(-90)") // Rotate the text for the Y-axis
+                .attr("y", -margin.left) // Position to the left of the Y-axis
+                .attr("x", -(height / 2)) // Position at the center of the axis
+                .attr("dy", "1em") // Nudge the text to align nicely
+                .style("text-anchor", "middle")
+                .style("font-size", "12px")
+                .text(language === 'ru' ? `Количество` : `Count`);
         }
     }, [data,language]);
 
