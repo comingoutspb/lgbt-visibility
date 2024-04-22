@@ -250,30 +250,27 @@ export default function Statistics({ topic, topicsMap }) {
       <>
         {
           (topicsMap[topic] === 'openness' ? (
-            // <div>
             <div className="charts-section">
-              <h2>{language === "ru" ? `Результаты по вариантам ответов` : `Results by response option`}</h2>
-              <PieChart data={pieData} onArcClick={handleArcClick} topicKey={topicsMap[topic]} />
-              <p className="statistics-description">{pieDescription}</p>
-            </div>
+            <h2>{language === "ru" ? `Результаты по вариантам ответов` : `Results by response option`}</h2>
+            <p className="statistics-description">{pieDescription}</p>
+            <PieChart data={pieData} onArcClick={handleArcClick} topicKey={topicsMap[topic]} />
+          </div>
           ) : topicsMap[topic] === "economical_status" ? (
-            // <div>
             <div className="charts-section">
-              <h2>{language === "ru" ? `Результаты по вопросам в категории` : `Results by questions in category`}</h2>
-              <BarPlot data={barData} onBarClick={handleArcClick} language={language} />
-              <p className="statistics-description">{barDescription}</p>
-              <h2>{language === "ru" ? `Средний доход по всем округам` : `Average income accross all districts`}</h2>
-              <PieChart data={incomeData} topicKey={topicsMap[topic]} />
-              <p className="statistics-description">{pieDescription}</p>
-            </div>
+            <h2>{language === "ru" ? `Результаты по вопросам в категории` : `Results by questions in category`}</h2>
+            <p className="statistics-description">{barDescription}</p>
+            <BarPlot data={barData} onBarClick={handleArcClick} language={language} />
+            <h2>{language === "ru" ? `Средний доход по всем округам` : `Average income across all districts`}</h2>
+            <p className="statistics-description">{pieDescription}</p>
+            <PieChart data={incomeData} topicKey={topicsMap[topic]} />
+          </div>
           ) : (
             // Default case for other topics
-            // <div>
             <div className="charts-section">
-              <h2>{language === "ru" ? `Результаты по вопросам в категории` : `Results by questions in category`}</h2>
-              <BarPlot data={barData} onBarClick={handleArcClick} />
-              <p className="statistics-description">{barDescription}</p>
-            </div>
+            <h2>{language === "ru" ? `Результаты по вопросам в категории` : `Results by questions in category`}</h2>
+            <p className="statistics-description">{barDescription}</p>
+            <BarPlot data={barData} onBarClick={handleArcClick} />
+          </div>
           ))
         }
 
@@ -308,39 +305,39 @@ export default function Statistics({ topic, topicsMap }) {
             // mapData.length > 0
             // &&
             <div className="map-section">
-              <h2>
-                {language === "ru"
-                  ? `Результаты по федеральным округам`
-                  : `Resuls by federal district`}
-              </h2>
-              <Map
-                statistics={mapData}
-                colorsForScale={
-                  topicsMap[topic] === "openness"
-                    ? ["#F4F3EE", "#7fc97f", "#1C402E"]//green
-                    : ["#F4F3EE", "#969AFF", "#242424"]//purple
-                }
-              />
-              <div>
-                <p className="statistics-description">
-                  {mapDescription}
-                  {topicsMap[topic] !== 'openness' && (
-                    <strong>
-                      {selectedQuestion !== "All" ? (
-                        language === 'ru'
-                          ? ` На карте отображены результаты подкатегории ${selectedQuestion}.`
-                          : ` The map displays results for the subcategory ${selectedQuestion}.`
-                      ) : (
-                        language === 'ru'
-                          ? ` На карте отображены результаты сумарно по всем подкатегориям.`
-                          : ` The map displays results across all subcategories.`
-                      )}
-                    </strong>
-                  )}
-                </p>
-              </div>
+  <h2>
+    {language === "ru"
+      ? `Результаты по Федеральным Округам`
+      : `Results by Federal District`}
+  </h2>
+  <div>
+    <p className="statistics-description">
+      {mapDescription}
+      {topicsMap[topic] !== 'openness' && (
+        <strong>
+          {selectedQuestion !== "All" ? (
+            language === 'ru'
+              ? ` На карте отображены результаты подкатегории ${selectedQuestion}.`
+              : ` The map displays results for the subcategory ${selectedQuestion}.`
+          ) : (
+            language === 'ru'
+              ? ` На карте отображены результаты суммарно по всем подкатегориям.`
+              : ` The map displays results across all subcategories.`
+          )}
+        </strong>
+      )}
+    </p>
+  </div>
+  <Map
+    statistics={mapData}
+    colorsForScale={
+      topicsMap[topic] === "openness"
+        ? ["#F4F3EE", "#7fc97f", "#1C402E"] // green
+        : ["#F4F3EE", "#969AFF", "#242424"] // purple
+    }
+  />
+</div>
 
-            </div>
           }
 
           <br />
