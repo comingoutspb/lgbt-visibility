@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/lgbt-visibility/static/css/main.e3524d75.css",
-    "main.js": "/lgbt-visibility/static/js/main.2287eca3.js",
+    "main.css": "/lgbt-visibility/static/css/main.75277bcb.css",
+    "main.js": "/lgbt-visibility/static/js/main.dba970c9.js",
     "static/js/787.d48df502.chunk.js": "/lgbt-visibility/static/js/787.d48df502.chunk.js",
     "static/media/loader.gif": "/lgbt-visibility/static/media/loader.7c62e238b05ff01af3b6.gif",
     "static/media/Stolzl-Regular.woff2": "/lgbt-visibility/static/media/Stolzl-Regular.5cbda06fcf6155861c21.woff2",
@@ -13,12 +13,12 @@
     "static/media/bg2.svg": "/lgbt-visibility/static/media/bg2.a177e241f3279be135fb8cd3f292c2f6.svg",
     "static/media/arrow.svg": "/lgbt-visibility/static/media/arrow.a9178c280c77af81dbf69e9d22fe39f5.svg",
     "index.html": "/lgbt-visibility/index.html",
-    "main.e3524d75.css.map": "/lgbt-visibility/static/css/main.e3524d75.css.map",
-    "main.2287eca3.js.map": "/lgbt-visibility/static/js/main.2287eca3.js.map",
+    "main.75277bcb.css.map": "/lgbt-visibility/static/css/main.75277bcb.css.map",
+    "main.dba970c9.js.map": "/lgbt-visibility/static/js/main.dba970c9.js.map",
     "787.d48df502.chunk.js.map": "/lgbt-visibility/static/js/787.d48df502.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e3524d75.css",
-    "static/js/main.2287eca3.js"
+    "static/css/main.75277bcb.css",
+    "static/js/main.dba970c9.js"
   ]
 }
