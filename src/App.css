@@ -237,7 +237,6 @@ header {
   left: 0px;
   top: 200px;
   overflow: hidden;
-  opacity: 0.3;
 }
 
 .button-group > button {
@@ -464,8 +463,8 @@ header {
 .legendText {
   display: flex;
   align-items: center;
-  flex-shrink: 0; 
-  /* width: 450px; */
+  /* flex-shrink: 0; 
+  width: 450px; */
 }
 
 .hasHighlight {
