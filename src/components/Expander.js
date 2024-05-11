@@ -93,7 +93,7 @@ function Expander({ year, data, language }) {
          
           <div style={{ padding: '20px' }} >
             <h2>
-            {language === 'ru' ? 'Доля респондентов по транс/цисгендерности': 'Percent of respiondents by Transgenderness'}
+            {language === 'ru' ? 'Доля респондентов по транс/цисгендерности': 'Percent of respondents by Transgenderness'}
             </h2>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <PieChart data={cistransData} onArcClick={handleArcClick} />

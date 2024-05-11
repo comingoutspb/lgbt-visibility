@@ -57,21 +57,24 @@ export default function Header() {
           className="header-buttons-container" 
           style={{ marginLeft: "20px" }} 
         > 
-          <a 
-            href="https://comingoutspb.com/we-are-helping/" 
-            className="button-secondary" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-          > 
-            {language === "ru" ? "Нужна помощь" : "Need Help"} 
-          </a> 
+          {language !== "en" && (
+            <a 
+              href="https://comingoutspb.com/we-are-helping/" 
+              className="button-secondary" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            > 
+              {language === "ru" ? "Нужна помощь" : "Need Help"}
+            </a>
+          )}
+
           <a 
             href="https://comingoutspb.org/support/" 
             className="button-primary" 
             target="_blank" 
             rel="noopener noreferrer" 
           > 
-            {language === "ru" ? "Хочу помочь" : "Want to Help"} 
+            {language === "ru" ? "Хочу помочь" : "Donate"} 
           </a> 
         </div> 
  

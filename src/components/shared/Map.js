@@ -90,10 +90,10 @@ function Map({
             name={d.properties.name}
             d={path(d)}
             fill= {color}
-            stroke="#0e1724"
+            stroke="#FFFFFF"
             strokeWidth="0.5"
             strokeOpacity="0.5"
-            opacity="0.9"
+            opacity="0.85"
             onMouseEnter={(e) => {
               d3.select(e.target).attr("opacity", 1);
             
@@ -112,7 +112,7 @@ function Map({
               setRegionValue(Math.round(relevantStatistics.value));
             }}
             onMouseOut={(e) => {
-              d3.select(e.target).attr("opacity", 0.9);
+              d3.select(e.target).attr("opacity", 0.85);
               setRegionDescription("");
               setRegionValue("");
             }}
