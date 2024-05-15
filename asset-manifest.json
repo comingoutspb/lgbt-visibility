@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/lgbt-visibility/static/css/main.75277bcb.css",
-    "main.js": "/lgbt-visibility/static/js/main.7be1f69f.js",
+    "main.js": "/lgbt-visibility/static/js/main.fa2ffb5e.js",
     "static/js/787.d48df502.chunk.js": "/lgbt-visibility/static/js/787.d48df502.chunk.js",
     "static/media/loader.gif": "/lgbt-visibility/static/media/loader.7c62e238b05ff01af3b6.gif",
     "static/media/logoEN.svg": "/lgbt-visibility/static/media/logoEN.8c5d301b12a76081d553d4329d4dd159.svg",
@@ -14,11 +14,11 @@
     "static/media/arrow.svg": "/lgbt-visibility/static/media/arrow.a9178c280c77af81dbf69e9d22fe39f5.svg",
     "index.html": "/lgbt-visibility/index.html",
     "main.75277bcb.css.map": "/lgbt-visibility/static/css/main.75277bcb.css.map",
-    "main.7be1f69f.js.map": "/lgbt-visibility/static/js/main.7be1f69f.js.map",
+    "main.fa2ffb5e.js.map": "/lgbt-visibility/static/js/main.fa2ffb5e.js.map",
     "787.d48df502.chunk.js.map": "/lgbt-visibility/static/js/787.d48df502.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.75277bcb.css",
-    "static/js/main.7be1f69f.js"
+    "static/js/main.fa2ffb5e.js"
   ]
 }
