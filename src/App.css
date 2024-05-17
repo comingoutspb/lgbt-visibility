@@ -507,7 +507,7 @@ header {
   color:  #777cff;
 }
 
-@media (max-width: 1204px) {
+@media (max-width: 1024px) {
 
   header {
     grid-template-columns: 200px 0 auto;
