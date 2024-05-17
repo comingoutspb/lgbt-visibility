@@ -506,3 +506,25 @@ header {
 .show-all-button:hover {
   color:  #777cff;
 }
+
+@media (max-width: 1204px) {
+
+  header {
+    grid-template-columns: 200px 0 auto;
+  }
+
+  header .buttin-group-header {
+    justify-content: flex-end;
+  }
+
+  .button-group:nth-of-type(2) {
+    display: flex;
+    max-width: 90%;
+    margin: 0 auto 30px;
+  }
+
+  .topic-component {
+    margin-top: 30px;
+  }
+
+}
