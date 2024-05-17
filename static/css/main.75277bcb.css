@@ -72,7 +72,7 @@
 @media (max-width: 680px) {
 	
 	body {
-		top: 0;
+		padding-top: 0;
 		min-width: 320px;
 	}
 	
@@ -83,6 +83,7 @@
         padding-bottom: 20px;
         margin-bottom: 20px;
         position: relative;
+		align-items: flex-start;
         gap: 5px;
     }
 	
@@ -90,7 +91,12 @@
         width: calc(100% - 40px);
         max-width: 480px;
         flex-direction: column;
+		gap: 5px;
     }
+	
+	.header-buttons-container {
+		width: 100%;
+	}
 	
 	.button-group:nth-of-type(2) .button-group>button:first-child,
 	.button-group:nth-of-type(2) .button-tetriary	{
@@ -131,8 +137,10 @@
 		flex-direction: column;
 	}
 	
+	.App .d3-component,
 	.topic-component svg {
 		max-width: 100%;
+		margin-left: -20px;
 	}
 	
 }
