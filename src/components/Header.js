@@ -69,7 +69,7 @@ export default function Header() {
           )}
 
           <a 
-           href={language === "ru" ? "https://comingoutspb.org/ru/donation/?utm_source=landing&utm_medium=website&utm_id=17may25" : "https://comingoutspb.org/en/donate/?utm_source=landing&utm_medium=website&utm_id=17may25"}
+           href={language === "ru" ? "https://comingoutspb.org/ru/legalcrowd2024/" : "https://comingoutspb.org/en/legalcrowd2024/"}
             className="button-primary" 
             target="_blank" 
             rel="noopener noreferrer" 
